@@ -74,6 +74,7 @@
                 </div>
                 <div class="hidden md:flex space-x-6">
                     <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">프로필 및 지원동기</a>
+                    <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">기술 스택</a>
                     <a href="#experience" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">경험</a>
                     <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">프로젝트</a>
                     <a href="#tools" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">개발 툴</a>
@@ -91,6 +92,7 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-[#0a0e1a] border-b border-gray-900 px-4 pt-2 pb-4 space-y-1">
             <a href="#about" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">프로필 및 지원동기</a>
+            <a href="#skills" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">기술 스택</a>
             <a href="#experience" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">경험</a>
             <a href="#projects" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">프로젝트</a>
             <a href="#tools" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">개발 툴</a>
@@ -231,6 +233,89 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">🖥️ 기술 스택 (Technical Skills)</h2>
+            <p class="text-gray-400 mt-3 text-base">
+                제가 사용하고 있거나 사용했던 기술 스택입니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Main Tech Stack -->
+            <div class="glass p-8 sm:p-10 rounded-3xl relative overflow-hidden group">
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors duration-500"></div>
+                <div class="flex items-center gap-3 mb-8">
+                    <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-lg text-xs font-bold uppercase tracking-wider">Main</span>
+                    <h3 class="text-2xl font-bold text-white">주력 기술 스택</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <!-- Java -->
+                    <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-blue-500/30 transition-all group/item">
+                        <i class="fa-brands fa-java text-4xl text-red-500 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-gray-200">Java</span>
+                    </div>
+                    <!-- Spring Boot -->
+                    <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-emerald-500/30 transition-all group/item">
+                        <i class="fa-solid fa-leaf text-4xl text-emerald-500 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-gray-200">SpringBoot</span>
+                    </div>
+                    <!-- MySQL -->
+                    <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-blue-400/30 transition-all group/item">
+                        <i class="fa-solid fa-database text-4xl text-blue-400 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-gray-200">MySQL</span>
+                    </div>
+                    <!-- MongoDB -->
+                    <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-green-500/30 transition-all group/item">
+                        <i class="fa-solid fa-leaf text-4xl text-green-500 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-gray-200">MongoDB</span>
+                    </div>
+                    <!-- Docker -->
+                    <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-sky-500/30 transition-all group/item">
+                        <i class="fa-brands fa-docker text-4xl text-sky-500 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-gray-200">Docker</span>
+                    </div>
+                    <!-- AWS -->
+                    <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-orange-500/30 transition-all group/item">
+                        <i class="fa-brands fa-aws text-4xl text-orange-400 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-gray-200">AWS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experienced Tech Stack -->
+            <div class="glass p-8 sm:p-10 rounded-3xl relative overflow-hidden group flex flex-col justify-between">
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/10 transition-colors duration-500"></div>
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-lg text-xs font-bold uppercase tracking-wider">Experienced</span>
+                        <h3 class="text-2xl font-bold text-white">경험해 본 기술 스택</h3>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <!-- Python -->
+                        <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-yellow-500/30 transition-all group/item">
+                            <i class="fa-brands fa-python text-4xl text-yellow-400 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                            <span class="text-sm font-semibold text-gray-200">Python</span>
+                        </div>
+                        <!-- FastAPI -->
+                        <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-teal-400/30 transition-all group/item">
+                            <i class="fa-solid fa-bolt text-4xl text-teal-400 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                            <span class="text-sm font-semibold text-gray-200">FastAPI</span>
+                        </div>
+                        <!-- PostgreSQL -->
+                        <div class="flex flex-col items-center justify-center p-5 bg-gray-950/40 border border-gray-900 rounded-2xl hover:border-indigo-400/30 transition-all group/item">
+                            <i class="fa-solid fa-database text-4xl text-indigo-400 mb-3 group-hover/item:scale-110 transition-transform"></i>
+                            <span class="text-sm font-semibold text-gray-200">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
