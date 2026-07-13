@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I AM | 백엔드 개발자 윤찬익</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        /* Premium Glassmorphism */
+        .glass {
+            background: rgba(13, 18, 30, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-button {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .glow-button::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .glow-button:hover::after {
+            opacity: 1;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-[#070a13] text-gray-100 min-h-screen overflow-x-hidden">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-gray-900 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-extrabold tracking-wider text-gradient flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i> CHANIK.DEV
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">프로필 및 지원동기</a>
+                    <a href="#experience" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">경험</a>
+                    <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">프로젝트</a>
+                    <a href="#tools" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">개발 툴</a>
+                    <a href="#hobbies" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">취미</a>
+                    <a href="#goals" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">목표</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0e1a] border-b border-gray-900 px-4 pt-2 pb-4 space-y-1">
+            <a href="#about" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">프로필 및 지원동기</a>
+            <a href="#experience" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">경험</a>
+            <a href="#projects" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">프로젝트</a>
+            <a href="#tools" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">개발 툴</a>
+            <a href="#hobbies" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">취미</a>
+            <a href="#goals" class="block text-gray-300 hover:text-blue-400 py-2 text-base font-medium">목표</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-36 pb-24 md:pt-44 md:pb-36 flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        <!-- Background Glowing Circles -->
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl -z-10 animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-4xl mx-auto space-y-6">
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none text-white">
+                안녕하세요, <span class="text-gradient">윤찬익</span>입니다.
+            </h1>
+            
+            <p class="text-lg sm:text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
+                "AI에 의존하지 않고 활용하고자 하는 백엔드 개발자입니다."
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 pt-6">
+                <a href="#about" class="glow-button px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-indigo-500/30 transform hover:-translate-y-1 transition-all">
+                    자세히 보기
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile & SSAFY Motivation Section -->
+    <section id="about" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Profile Card -->
+            <div class="lg:col-span-5 glass p-8 sm:p-10 rounded-3xl flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -z-10 group-hover:bg-blue-500/20 transition-all duration-500"></div>
+                <div>
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-white text-3xl font-extrabold shadow-md">
+                            Y
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">윤찬익</h2>
+                            <p class="text-sm text-indigo-400">프로필 (Profile)</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 bg-gray-950/40 p-4 rounded-xl border border-gray-900">
+                            <div class="text-blue-400 w-8 text-center"><i class="fa-solid fa-user text-lg"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500">이름</p>
+                                <p class="text-base font-bold text-gray-200">윤찬익</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-gray-950/40 p-4 rounded-xl border border-gray-900">
+                            <div class="text-blue-400 w-8 text-center"><i class="fa-solid fa-cake-candles text-lg"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500">출생</p>
+                                <p class="text-base font-bold text-gray-200">1999년생</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-gray-950/40 p-4 rounded-xl border border-gray-900">
+                            <div class="text-blue-400 w-8 text-center"><i class="fa-solid fa-graduation-cap text-lg"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500">전공</p>
+                                <p class="text-base font-bold text-gray-200">컴퓨터공학 전공</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-gray-950/40 p-4 rounded-xl border border-gray-900">
+                            <div class="text-blue-400 w-8 text-center"><i class="fa-solid fa-terminal text-lg"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500">역할</p>
+                                <p class="text-base font-bold text-gray-200">백엔드 개발자</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SSAFY Motivation Panel -->
+            <div class="lg:col-span-7 glass p-8 sm:p-10 rounded-3xl flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl -z-10"></div>
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-lg text-xs font-bold uppercase tracking-wider">Motivation</span>
+                        <h2 class="text-2xl font-bold text-white">싸피 지원동기</h2>
+                    </div>
+                    
+                    <div class="space-y-6 text-gray-300">
+                        <div class="flex gap-4 items-start">
+                            <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-xl mt-1">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <p class="text-base leading-relaxed mt-1">
+                                부족한 기초를 채우고, 취업을 잘하고 싶어 지원했습니다.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="p-2.5 bg-indigo-500/10 text-indigo-400 rounded-xl mt-1">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <p class="text-base leading-relaxed mt-1">
+                                AI에 의존하지 않고 활용하기 위해서는 기초를 다져야겠다고 생각했습니다.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="p-2.5 bg-purple-500/10 text-purple-400 rounded-xl mt-1">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <p class="text-base leading-relaxed mt-1">
+                                프로젝트를 수행하면서 부족함을 많이 느껴서 지원한 이유도 있습니다.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="p-2.5 bg-yellow-500/10 text-yellow-400 rounded-xl mt-1">
+                                <i class="fa-solid fa-coins"></i>
+                            </div>
+                            <p class="text-base leading-relaxed mt-1 font-semibold text-yellow-200">
+                                큰 지원금액에 이끌린 것도 있습니다.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="p-2.5 bg-pink-500/10 text-pink-400 rounded-xl mt-1">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <p class="text-base leading-relaxed mt-1 font-semibold text-pink-200">
+                                밥이 맛있다고 하더라고요.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gradient-to-b from-[#070a13] to-[#0a0f1d] scroll-mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">학창 시절 및 경험 (Experience)</h2>
+            </div>
+
+            <div class="relative border-l border-gray-800 max-w-3xl mx-auto pl-6 sm:pl-10 space-y-12">
+                <!-- Timeline Line Glow overlay -->
+                <div class="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500 to-purple-600"></div>
+
+                <!-- Experience Item 1 -->
+                <div class="relative group">
+                    <div class="absolute -left-[41px] sm:-left-[57px] top-1 w-8 h-8 rounded-full bg-[#070a13] border-2 border-blue-500 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                        <i class="fa-solid fa-users text-xs"></i>
+                    </div>
+                    <div class="glass p-6 sm:p-8 rounded-2xl transform group-hover:translate-x-2 transition-transform duration-300">
+                        <span class="text-sm font-bold text-blue-400 uppercase tracking-widest">📌 동아리 회장 경험</span>
+                        <p class="text-base text-gray-300 mt-4 leading-relaxed">
+                            학과 내 개발 동아리 회장을 맡은 적이 있습니다. 학교 생활 중 가장 열정을 쏟은 활동으로 가장 기억에 남습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="relative group">
+                    <div class="absolute -left-[41px] sm:-left-[57px] top-1 w-8 h-8 rounded-full bg-[#070a13] border-2 border-purple-500 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(167,139,250,0.5)]">
+                        <i class="fa-solid fa-graduation-cap text-xs"></i>
+                    </div>
+                    <div class="glass p-6 sm:p-8 rounded-2xl transform group-hover:translate-x-2 transition-transform duration-300">
+                        <span class="text-sm font-bold text-purple-400 uppercase tracking-widest">🖥️ 컴퓨터공학 전공</span>
+                        <p class="text-base text-gray-300 mt-4 leading-relaxed">
+                            밤잠을 새가며 졸업 프로젝트를 완수했던 것이 가장 기억에 남습니다. 공모전에서 상을 받아서 뿌듯했습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">🚀 프로젝트 경험</h2>
+            <p class="text-gray-400 mt-3 text-base">
+                어느 정도의 규모가 되는 프로젝트 경험은 3번 정도 있습니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project Card 1 -->
+            <div onclick="openModal(1)" class="glass rounded-2xl overflow-hidden hover:scale-[1.03] transition-all duration-300 cursor-pointer group border border-gray-900 hover:border-blue-500/50 flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-gradient-to-tr from-blue-950/40 to-[#070a13] flex items-center justify-center relative">
+                        <i class="fa-solid fa-compass text-6xl text-blue-500/20 group-hover:text-blue-500/40 transition-colors"></i>
+                        <span class="absolute top-4 right-4 bg-blue-500/10 text-blue-400 text-xs px-2.5 py-1 rounded-full font-bold">Project 01</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">지구자기장 기반 실내 계측 프로젝트</h3>
+                        <p class="text-sm text-gray-400 mt-3 leading-relaxed">
+                            실내에서도 GPS처럼 길을 찾을 수 있을까? 자기장 + 딥러닝 + PDR로 해결한 프로젝트입니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex justify-between items-center">
+                    <span class="text-xs text-blue-400 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-pointer"></i> 자세히 보기 
+                        <span class="px-1.5 py-0.5 bg-blue-500/10 text-blue-400 text-[9px] rounded font-bold uppercase tracking-wider border border-blue-500/20">GitHub</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-blue-400 transition-transform group-hover:translate-x-1"></i>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div onclick="openModal(2)" class="glass rounded-2xl overflow-hidden hover:scale-[1.03] transition-all duration-300 cursor-pointer group border border-gray-900 hover:border-emerald-500/50 flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-gradient-to-tr from-emerald-950/40 to-[#070a13] flex items-center justify-center relative">
+                        <i class="fa-solid fa-file-invoice text-6xl text-emerald-500/20 group-hover:text-emerald-500/40 transition-colors"></i>
+                        <span class="absolute top-4 right-4 bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold">Project 02</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Paperdot</h3>
+                        <p class="text-sm text-gray-400 mt-3 leading-relaxed">
+                            영어 원문과 번역문을 문장 단위로 정렬해주는 학습용 문서 리더 서비스입니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex justify-between items-center">
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-pointer"></i> 자세히 보기
+                        <span class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 text-[9px] rounded font-bold uppercase tracking-wider border border-emerald-500/20">Live</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-emerald-400 transition-transform group-hover:translate-x-1"></i>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div onclick="openModal(3)" class="glass rounded-2xl overflow-hidden hover:scale-[1.03] transition-all duration-300 cursor-pointer group border border-gray-900 hover:border-purple-500/50 flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-gradient-to-tr from-purple-950/40 to-[#070a13] flex items-center justify-center relative">
+                        <i class="fa-solid fa-house-user text-6xl text-purple-500/20 group-hover:text-purple-500/40 transition-colors"></i>
+                        <span class="absolute top-4 right-4 bg-purple-500/10 text-purple-400 text-xs px-2.5 py-1 rounded-full font-bold">Project 03</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">한국 장기 거주 외국인들을 위한 주거공간 추천 서비스</h3>
+                        <p class="text-sm text-gray-400 mt-3 leading-relaxed">
+                            어느 정도의 규모가 되는 프로젝트 경험 중 세 번째 프로젝트입니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex justify-between items-center">
+                    <span class="text-xs text-purple-400 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-pointer"></i> 자세히 보기
+                        <span class="px-1.5 py-0.5 bg-purple-500/10 text-purple-400 text-[9px] rounded font-bold uppercase tracking-wider border border-purple-500/20">GitHub</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-purple-400 transition-transform group-hover:translate-x-1"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-20 bg-gradient-to-b from-[#0a0f1d] to-[#070a13] scroll-mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">🔧 유용한 개발 툴 추천</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tool 1 -->
+                <div class="glass p-6 sm:p-8 rounded-2xl border border-gray-900 hover:border-indigo-500/40 transition-colors">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl text-indigo-400"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <span class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full font-bold">AI Helper</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Codex (코덱스)</h3>
+                    <p class="text-base text-gray-300 mt-3 leading-relaxed">
+                        메인으로 사용하고 있는 툴입니다. 프로를 결제하시면 토큰 양이 많아서 작업 흐름이 끊기지 않아서 최고 장점인 것 같습니다.
+                    </p>
+                </div>
+
+                <!-- Tool 2 -->
+                <div class="glass p-6 sm:p-8 rounded-2xl border border-gray-900 hover:border-red-500/40 transition-colors">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl text-red-400"><i class="fa-solid fa-cubes"></i></div>
+                        <span class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded-full font-bold">IDE</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">인텔리제이</h3>
+                    <p class="text-base text-gray-300 mt-3 leading-relaxed">
+                        요즘은 vs코드를 주로 사용하는 사람도 많지만, 인텔리제이 얼티밋으로 개발하면 데이터베이스와 연동성이 너무 좋아서 계속 사용하고 있습니다. 물론 vs코드도 사용합니다.
+                    </p>
+                </div>
+
+                <!-- Tool 3 -->
+                <div class="glass p-6 sm:p-8 rounded-2xl border border-gray-900 hover:border-blue-500/40 transition-colors">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl text-blue-400"><i class="fa-solid fa-code"></i></div>
+                        <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-bold">Sub IDE</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">vs코드</h3>
+                    <p class="text-base text-gray-300 mt-3 leading-relaxed">
+                        (마크다운 파일 읽는 것은 vs코드가 압도적으로 좋은 것 같습니다.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">🎯 취미 및 라이프스타일 (Hobbies)</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Fitness & Sports Card -->
+            <div class="glass p-8 rounded-3xl relative overflow-hidden group flex flex-col justify-between">
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors duration-500"></div>
+                
+                <div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="bg-emerald-500/10 text-emerald-400 p-4 rounded-2xl">
+                            <i class="fa-solid fa-dumbbell text-2xl"></i>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">Sports</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-4">🏋️ 운동</h3>
+                    
+                    <div class="space-y-4 text-base text-gray-300 leading-relaxed">
+                        <p>
+                            헬스를 주로 하고 있습니다. 지금은 쉬고 있습니다. 예전엔 농구도 많이 즐겼고, 축구 보는 걸 가장 좋아합니다. 응원하는 팀은 바이에른 뮌헨입니다.
+                        </p>
+                    </div>
+                </div>
+                
+                <div>
+                    <!-- Bayern Munich Interactive Fan Button -->
+                    <div class="mt-6 p-4 bg-[#6d1323]/30 border border-[#dc052d]/40 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-full bg-[#dc052d] text-white font-extrabold flex items-center justify-center text-xs shadow-md">FCB</span>
+                            <div>
+                                <p class="text-xs text-[#dc052d] font-bold">바이에른 뮌헨</p>
+                                <p class="text-sm font-semibold text-white">FC Bayern München</p>
+                            </div>
+                        </div>
+                        <button onclick="cheerBayern()" class="px-4 py-2 bg-[#dc052d] hover:bg-[#b00424] text-white text-xs font-bold rounded-lg transition-colors shadow">
+                            팀 응원하기! 📣
+                        </button>
+                    </div>
+                    <p id="cheer-text" class="text-center text-xs text-[#dc052d] font-semibold mt-2 h-4 opacity-0 transition-opacity duration-300"></p>
+                </div>
+            </div>
+
+            <!-- Anime Card with Genre Selector -->
+            <div class="glass p-8 rounded-3xl relative overflow-hidden group flex flex-col justify-between">
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-pink-500/5 rounded-full blur-2xl group-hover:bg-pink-500/10 transition-colors duration-500"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="bg-pink-500/10 text-pink-400 p-4 rounded-2xl">
+                            <i class="fa-solid fa-clapperboard text-2xl"></i>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 bg-pink-500/10 text-pink-400 border border-pink-500/20 rounded-full">Contents</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-4">🎬 애니메이션 시청</h3>
+                    <p class="text-base text-gray-300 leading-relaxed mb-6">
+                        애니 시청을 좋아합니다. 장르는 크게 가리진 않습니다.
+                    </p>
+                </div>
+
+                <!-- Recommendation box (Interactive) -->
+                <div class="bg-gray-900/60 p-5 rounded-2xl border border-gray-800">
+                    <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-wand-magic-sparkles text-pink-400 mr-1"></i> 찬익 추천 명작 도서관</p>
+                    <div id="anime-box" class="h-16 flex flex-col justify-center">
+                        <p class="text-sm font-bold text-white">어떤 애니를 볼지 고민되시나요?</p>
+                        <p class="text-xs text-gray-400 mt-1">아래 버튼을 누르면 추천 명작이 제공됩니다.</p>
+                    </div>
+                    <button onclick="getAnimeRecommend()" class="mt-4 w-full py-2.5 bg-gradient-to-r from-pink-500/20 to-purple-500/20 hover:from-pink-500/30 hover:to-purple-500/30 border border-pink-500/30 hover:border-pink-500/50 text-pink-300 text-xs font-bold rounded-xl transition-all">
+                        애니메이션 추천받기 🎬
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pokemon GO Card -->
+            <div class="glass p-8 rounded-3xl relative overflow-hidden group flex flex-col justify-between">
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors duration-500"></div>
+
+                <div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="bg-blue-500/10 text-blue-400 p-4 rounded-2xl">
+                            <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full">Game</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-4">📱 포켓몬 GO</h3>
+                    
+                    <div class="space-y-4 text-base text-gray-300 leading-relaxed mb-6">
+                        <p>
+                            요즘에 포켓몬고에 빠져있습니다. 최근에 전설의 포켓몬을 잡아서 기분이 좋습니다.
+                        </p>
+                        <p>
+                            디아루가, 제크로무, 레시라무, 루기아 등을 잡았고 레벨은 42 정도입니다. 혹시라도 같이 하실 분 있으시면 말씀해주세요.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Showcase Pokémon (Interactive UI) -->
+                <div class="bg-gray-900/60 p-4 rounded-2xl border border-gray-800">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs text-gray-500 font-semibold"><i class="fa-solid fa-trophy text-yellow-500 mr-1"></i> 전설의 도감</span>
+                        <span class="text-xs text-blue-400 font-bold">Trainer Lv. 42</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 text-center text-[10px] text-gray-400">
+                        <div class="bg-gray-800/80 p-1.5 rounded-lg border border-blue-500/20">
+                            <div class="text-lg">⏳</div>
+                            <span class="font-bold text-gray-200">디아루가</span>
+                        </div>
+                        <div class="bg-gray-800/80 p-1.5 rounded-lg border border-indigo-500/20">
+                            <div class="text-lg">⚡</div>
+                            <span class="font-bold text-gray-200">제크로무</span>
+                        </div>
+                        <div class="bg-gray-800/80 p-1.5 rounded-lg border border-red-500/20">
+                            <div class="text-lg">🔥</div>
+                            <span class="font-bold text-gray-200">레시라무</span>
+                        </div>
+                        <div class="bg-gray-800/80 p-1.5 rounded-lg border border-teal-500/20">
+                            <div class="text-lg">💨</div>
+                            <span class="font-bold text-gray-200">루기아</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals & Gamification Section -->
+    <section id="goals" class="py-20 bg-gradient-to-b from-[#070a13] to-[#05070d] text-center px-4 scroll-mt-16">
+        <div class="max-w-4xl mx-auto glass p-8 sm:p-12 rounded-3xl relative overflow-hidden">
+            <div class="absolute -left-16 -top-16 w-36 h-36 bg-blue-500/10 rounded-full blur-2xl"></div>
+            <div class="absolute -right-16 -bottom-16 w-36 h-36 bg-purple-500/10 rounded-full blur-2xl"></div>
+
+            <div class="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 px-4 py-1.5 rounded-full text-purple-400 text-xs font-semibold mb-6">
+                <i class="fa-solid fa-gamepad"></i> SSAFY Level Up Road (목표)
+            </div>
+
+            <h2 class="text-3xl font-extrabold text-white">목표</h2>
+            <p class="text-sm text-gray-400 mt-2 max-w-lg mx-auto">목표를 클릭하여 달성하면 성장률과 찬익님의 싸피 등급이 업데이트됩니다.</p>
+
+            <!-- Progress Bar -->
+            <div class="mt-8 max-w-md mx-auto">
+                <div class="flex justify-between items-center text-xs text-gray-400 mb-2 px-1">
+                    <span>성장도</span>
+                    <span id="level-percentage" class="font-bold text-blue-400">0%</span>
+                </div>
+                <div class="w-full bg-gray-800 h-4 rounded-full overflow-hidden p-0.5 border border-gray-700">
+                    <div id="progress-bar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <div class="mt-3 text-base text-gray-300 font-bold">
+                    현재 등급: <span id="user-tier" class="text-yellow-400 font-black">아기 사자 (Bronze) 🦁</span>
+                </div>
+            </div>
+
+            <!-- Checklist Targets -->
+            <div class="mt-8 text-left max-w-xl mx-auto space-y-3">
+                <label class="flex items-center gap-4 bg-gray-950/60 p-4 rounded-xl border border-gray-900 hover:border-gray-800 transition-colors cursor-pointer select-none">
+                    <input type="checkbox" onchange="calculateProgress()" class="goal-checkbox w-5 h-5 checked:bg-blue-600 accent-blue-500 rounded border-gray-700 bg-gray-800">
+                    <div>
+                        <p class="text-base font-semibold text-white">싸피에서 기본 실력을 갈고 닦아 AI에 의존이 아닌 AI를 활용하는 개발자가 되겠습니다.</p>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-4 bg-gray-950/60 p-4 rounded-xl border border-gray-900 hover:border-gray-800 transition-colors cursor-pointer select-none">
+                    <input type="checkbox" onchange="calculateProgress()" class="goal-checkbox w-5 h-5 checked:bg-blue-600 accent-blue-500 rounded border-gray-700 bg-gray-800">
+                    <div>
+                        <p class="text-base font-semibold text-white">좋은 곳에 취업하고 싶습니다.</p>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-4 bg-gray-950/60 p-4 rounded-xl border border-gray-900 hover:border-gray-800 transition-colors cursor-pointer select-none">
+                    <input type="checkbox" onchange="calculateProgress()" class="goal-checkbox w-5 h-5 checked:bg-blue-600 accent-blue-500 rounded border-gray-700 bg-gray-800">
+                    <div>
+                        <p class="text-base font-semibold text-white">가능하다면 프론트 지식도 많이 쌓고 싶습니다.</p>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-4 bg-gray-950/60 p-4 rounded-xl border border-gray-900 hover:border-gray-800 transition-colors cursor-pointer select-none">
+                    <input type="checkbox" onchange="calculateProgress()" class="goal-checkbox w-5 h-5 checked:bg-blue-600 accent-blue-500 rounded border-gray-700 bg-gray-800">
+                    <div>
+                        <p class="text-base font-semibold text-white">알고리즘 실력을 길러 삼성 B형을 획득하고 싶습니다.</p>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-950 py-8 bg-gray-950/80 text-center text-xs text-gray-500">
+        <p>© 2026 윤찬익. All rights reserved.</p>
+        <p class="mt-1">Designed by SSAFY 13th Ready Developer</p>
+    </footer>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+        <div class="glass max-w-xl w-full rounded-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative border border-gray-800">
+            <!-- Modal Close button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <span id="modal-tag" class="px-2.5 py-1 text-xs font-bold rounded-lg uppercase tracking-wider bg-blue-500/20 text-blue-400">PROJECT</span>
+                    <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
+                </div>
+                
+                <hr class="border-gray-900 my-4">
+                
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                            <i class="fa-solid fa-file-invoice text-blue-400"></i> 내용
+                        </h4>
+                        <p id="modal-desc" class="text-base text-gray-400 mt-3 leading-relaxed whitespace-pre-line"></p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center gap-4">
+                    <!-- Dynamic Link Button container -->
+                    <div id="modal-link-container"></div>
+                    
+                    <button onclick="closeModal()" class="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm font-semibold transition-colors">
+                        창 닫기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Area -->
+    <script>
+        // Project Modal Handling
+        const projectData = {
+            1: {
+                title: "지구자기장 기반 실내 계측 프로젝트",
+                desc: "실내에서도 GPS처럼 길을 찾을 수 있을까?\n→ 자기장 + 딥러닝 + PDR로 해결한 프로젝트\n\n📌 프로젝트 개요\n\nMagNavi는 스마트폰 센서만을 활용하여 실내에서도 정확한 위치를 제공하는 실내 계측 프로젝트입니다.",
+                link: "https://github.com/ychoik/back_fastapi_my"
+            },
+            2: {
+                title: "Paperdot",
+                desc: "영어 원문과 번역문을 문장 단위로 정렬해주는 학습용 문서 리더 서비스\n\n영어 PDF를 읽을 때 원문과 번역을 자연스럽게 문장별로 일대일 매칭해서 볼 수 없을까?\n→ 문서 파싱 + 문장 분리 + 번역 파이프라인으로 해결한 프로젝트\n\n📌 프로젝트 개요\n\nPaperdot은 영어 PDF 문서를 업로드하면 원문을 문장 단위로 분리하고, 번역문과 정렬하여 사용자가 원문과 번역을 1:1로 대응해 읽을 수 있도록 돕는 서비스입니다.\n\n기존의 단순 번역기는 문서 전체 맥락을 유지하기 어렵고, PDF 특유의 복잡한 레이아웃 때문에 텍스트 추출이 불안정한 문제가 있습니다. 이를 해결하기 위해 PDF 파싱 + 문장 단위 분할 + 번역 정렬 + AI연동 구조로 서비스를 설계했습니다.",
+                link: "https://www.paperdot.site/"
+            },
+            3: {
+                title: "한국 장기 거주 외국인들을 위한 주거공간 추천 서비스",
+                desc: "현재 진행하고 있는 프로젝트입니다. 현재 mvp 단계까지는 개발을 마쳤고, 곧 앱 스토어에 출시 예정입니다. \n\n정말 힘들었고, 지금도 힘듭니다. 하지만 가장 많은 성장을 한 프로젝트 인 것 같습니다.",
+                link: "https://github.com/ychoik/Kohere-backend"
+            }
+        };
+
+        function openModal(id) {
+            const data = projectData[id];
+            if(!data) return;
+
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-desc').textContent = data.desc;
+
+            // Render dynamic link button
+            const linkContainer = document.getElementById('modal-link-container');
+            linkContainer.innerHTML = ''; // Reset container
+
+            if(data.link) {
+                const isGithub = data.link.includes('github.com');
+                const btn = document.createElement('a');
+                btn.href = data.link;
+                btn.target = "_blank";
+                
+                if (isGithub) {
+                    btn.className = "inline-flex items-center gap-2 px-4 py-2.5 bg-gray-900 hover:bg-black border border-gray-800 text-white text-sm font-semibold rounded-lg transition-colors";
+                    btn.innerHTML = `<i class="fa-brands fa-github text-base"></i> GitHub 저장소 방문하기`;
+                } else {
+                    btn.className = "inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition-all shadow-md shadow-emerald-500/10";
+                    btn.innerHTML = `<i class="fa-solid fa-globe"></i> 결과 사이트 방문하기`;
+                }
+                linkContainer.appendChild(btn);
+            }
+
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.firstElementChild.classList.remove('scale-95');
+                modal.firstElementChild.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('project-modal');
+            modal.firstElementChild.classList.add('scale-95');
+            modal.firstElementChild.classList.remove('scale-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Bayern Munich cheer handler
+        function cheerBayern() {
+            const cheer = document.getElementById('cheer-text');
+            cheer.textContent = "Mia San Mia! 바이에른 뮌헨을 진심으로 응원합니다! 🔴⚪️";
+            cheer.classList.remove('opacity-0');
+            cheer.classList.add('opacity-100');
+            setTimeout(() => {
+                cheer.classList.remove('opacity-100');
+                cheer.classList.add('opacity-0');
+            }, 4000);
+        }
+
+        // Anime recommendation handler
+        const animeRecommendations = [
+            { title: "진격의 거인", desc: "치밀한 세계관과 충격적인 전개의 명작" },
+            { title: "강철의 연금술사", desc: "완벽한 완결성과 탄탄한 스토리의 고전 명작" },
+            { title: "귀멸의 칼날", desc: "압도적인 작화와 타격감 높은 연출력" },
+            { title: "하이큐!!", desc: "성장과 협업의 감동을 선사하는 최고의 스포츠물" },
+            { title: "슈타인즈 게이트", desc: "시간 여행 스토리의 치밀한 정석" },
+            { title: "어서오세요 실력 지상주의 교실에", desc: "치밀한 두뇌 싸움과 예측할 수 없는 반전의 재미" },
+            { title: "에이티식스", desc: "묵직한 스토리텔링과 가슴을 울리는 압도적인 여운" },
+            { title: "코드기어스", desc: "세계를 향한 혁명과 짜릿한 두뇌 싸움의 서사시" },
+            { title: "소드아트온라인", desc: "가상현실 데스 게임 속 모험과 로맨스를 다룬 명작" }
+        ];
+
+        function getAnimeRecommend() {
+            const box = document.getElementById('anime-box');
+            const random = animeRecommendations[Math.floor(Math.random() * animeRecommendations.length)];
+            
+            box.style.opacity = '0';
+            setTimeout(() => {
+                box.innerHTML = `
+                    <p class="text-sm font-bold text-pink-400"><i class="fa-solid fa-star"></i> ${random.title}</p>
+                    <p class="text-xs text-gray-300 mt-1">${random.desc}</p>
+                `;
+                box.style.opacity = '1';
+            }, 150);
+        }
+
+        // Gamification progress bar logic
+        function calculateProgress() {
+            const checkboxes = document.querySelectorAll('.goal-checkbox');
+            const checked = document.querySelectorAll('.goal-checkbox:checked');
+            const total = checkboxes.length;
+            const score = checked.length;
+            const percentage = Math.round((score / total) * 100);
+
+            const bar = document.getElementById('progress-bar');
+            const percentText = document.getElementById('level-percentage');
+            const tierText = document.getElementById('user-tier');
+
+            bar.style.width = `${percentage}%`;
+            percentText.textContent = `${percentage}%`;
+
+            if(percentage === 0) {
+                tierText.innerHTML = "아기 사자 (Bronze) 🦁";
+                tierText.className = "text-yellow-400 font-black text-base";
+            } else if(percentage === 25) {
+                tierText.innerHTML = "열정 준비생 (Silver) 🥈";
+                tierText.className = "text-gray-300 font-black text-base";
+            } else if(percentage === 50) {
+                tierText.innerHTML = "알고리즘 탐험가 (Gold) 🥇";
+                tierText.className = "text-yellow-500 font-black text-base";
+            } else if(percentage === 75) {
+                tierText.innerHTML = "백엔드 루키 (Platinum) 💎";
+                tierText.className = "text-teal-400 font-black text-base";
+            } else if(percentage === 100) {
+                tierText.innerHTML = "삼성 B형 정복 마스터 (Challenger) 👑";
+                tierText.className = "text-gradient font-black animate-pulse text-base";
+            }
+        }
+
+        // Mobile Menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Dynamic Scroll Header
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow-2xl', 'bg-slate-950/95');
+                nav.classList.remove('bg-gray-950/70');
+            } else {
+                nav.classList.remove('py-2', 'shadow-2xl', 'bg-slate-950/95');
+                nav.classList.add('bg-gray-950/70');
+            }
+        });
+    </script>
+</body>
+</html>
+```
